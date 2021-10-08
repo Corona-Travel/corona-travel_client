@@ -1,0 +1,6 @@
+{
+    "scm.defaultViewMode": "tree",
+    "conventionalCommits.scopes": [
+        "README.md",
+    ],
+}
