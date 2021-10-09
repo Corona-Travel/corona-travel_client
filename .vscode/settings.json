@@ -3,5 +3,6 @@
     "npm.packageManager": "pnpm",
     "conventionalCommits.scopes": [
         "README.md",
+        ".devcontainer"
     ],
 }
