@@ -18,7 +18,8 @@
     "fix": "run-p fix:*",
     "fix:next": "next lint --fix",
     "fix:prettier": "npx prettier --ignore-path ./.gitignore --write .",
-    "fix:stylelint": "stylelint --fix '**/*.css'"
+    "fix:stylelint": "stylelint --fix '**/*.css'",
+    "stylelint-config-prettier-check": "stylelint-config-prettier-check"
   },
   "dependencies": {
     "next": "11.1.2",
@@ -35,6 +36,7 @@
     "postcss": "^8.3.9",
     "prettier": "2.4.1",
     "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^9.0.1",
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0",
     "stylelint-prettier": "^1.2.0",

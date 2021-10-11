@@ -13,6 +13,7 @@ specifiers:
   react: 17.0.2
   react-dom: 17.0.2
   stylelint: ^13.13.1
+  stylelint-config-prettier: ^9.0.1
   stylelint-config-standard: ^22.0.0
   stylelint-order: ^4.1.0
   stylelint-prettier: ^1.2.0
@@ -34,6 +35,7 @@ devDependencies:
   postcss: 8.3.9
   prettier: 2.4.1
   stylelint: 13.13.1
+  stylelint-config-prettier: 9.0.1_stylelint@13.13.1
   stylelint-config-standard: 22.0.0_stylelint@13.13.1
   stylelint-order: 4.1.0_stylelint@13.13.1
   stylelint-prettier: 1.2.0_prettier@2.4.1+stylelint@13.13.1
@@ -4174,6 +4176,16 @@ packages:
       stylis: 3.5.4
       stylis-rule-sheet: 0.0.10_stylis@3.5.4
     dev: false
+
+  /stylelint-config-prettier/9.0.1_stylelint@13.13.1:
+    resolution: {integrity: sha512-Sh5KGOHF0q1s+ytSwNfD2oUjm8FIDQ1hCdANgSvRdgf76UPb+mBJV1JQ53VblrNbPdyvWQHfLKsY+A8XphHHDw==}
+    engines: {node: '>= 12'}
+    hasBin: true
+    peerDependencies:
+      stylelint: '>=11.0.0'
+    dependencies:
+      stylelint: 13.13.1
+    dev: true
 
   /stylelint-config-recommended/5.0.0_stylelint@13.13.1:
     resolution: {integrity: sha512-c8aubuARSu5A3vEHLBeOSJt1udOdS+1iue7BmJDTSXoCBmfEQmmWX+59vYIj3NQdJBY6a/QRv1ozVFpaB9jaqA==}
