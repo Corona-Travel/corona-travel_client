@@ -13,6 +13,12 @@ git flow feature finish
 git flow feature publish
 ```
 
+Commands
+--------
+* `dev`: start dev server
+* `lint`: run linters sequentially
+* `fix`: run all fixers in paralel
+
 Usefull links
 -------------
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
