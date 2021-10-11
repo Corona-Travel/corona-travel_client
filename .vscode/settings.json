@@ -1,5 +1,6 @@
 {
   "scm.defaultViewMode": "tree",
   "npm.packageManager": "pnpm",
-  "conventionalCommits.scopes": ["README.md", ".devcontainer"]
+  "conventionalCommits.scopes": ["README.md", ".devcontainer"],
+  "explorer.openEditors.visible": 0
 }
