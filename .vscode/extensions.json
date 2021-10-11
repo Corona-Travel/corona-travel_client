@@ -1,9 +1,9 @@
 {
-    "recommendations": [
-        "vivaxy.vscode-conventional-commits",
-        "csstools.postcss",
-        "bradlc.vscode-tailwindcss",
-        "stylelint.vscode-stylelint",
-        "editorconfig.editorconfig"
-    ],
+  "recommendations": [
+    "vivaxy.vscode-conventional-commits",
+    "csstools.postcss",
+    "bradlc.vscode-tailwindcss",
+    "stylelint.vscode-stylelint",
+    "editorconfig.editorconfig"
+  ]
 }
