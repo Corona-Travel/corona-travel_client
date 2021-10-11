@@ -3,6 +3,7 @@
         "vivaxy.vscode-conventional-commits",
         "csstools.postcss",
         "bradlc.vscode-tailwindcss",
-        "stylelint.vscode-stylelint"
+        "stylelint.vscode-stylelint",
+        "editorconfig.editorconfig"
     ],
 }
