@@ -32,10 +32,10 @@ Usefull links
 <!-- prettier-ignore -->
 TODO
 ----
-- [ ] linters
-- [ ] fixers
+- [x] linters
+- [x] fixers
 - [ ] conventional commit
-- [ ] tailwind(bootstrap?)
+- [x] tailwind(bootstrap?)
 - [ ] i18n
 - [ ] docker
 - [ ] ci/cd
