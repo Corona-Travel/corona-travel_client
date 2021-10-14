@@ -34,7 +34,7 @@ TODO
 ----
 - [x] linters
 - [x] fixers
-- [ ] conventional commit
+- [x] conventional commit
 - [x] tailwind(bootstrap?)
 - [ ] i18n
 - [ ] docker
