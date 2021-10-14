@@ -4,6 +4,9 @@
     "csstools.postcss",
     "bradlc.vscode-tailwindcss",
     "stylelint.vscode-stylelint",
-    "editorconfig.editorconfig"
+    "editorconfig.editorconfig",
+    "bierner.markdown-checkbox",
+    "bierner.markdown-emoji",
+    "ozaki.markdown-github-dark"
   ]
 }
