@@ -39,3 +39,4 @@ TODO
 - [ ] i18n
 - [x] docker
 - [ ] ci/cd
+- [x] better index page
