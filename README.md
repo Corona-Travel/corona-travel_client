@@ -37,5 +37,5 @@ TODO
 - [x] conventional commit
 - [x] tailwind(bootstrap?)
 - [ ] i18n
-- [ ] docker
+- [x] docker
 - [ ] ci/cd
