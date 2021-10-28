@@ -27,8 +27,12 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>🦠 Here will be our future web app</main>
-      <div style={{ height: '100vh', width: '100%' }}>
-        <Map2D APIkey={process.env.NEXT_PUBLIC_GMAP_KEY || ""} zoom={1} markers={markers} />
+      <div style={{ height: "100vh", width: "100%" }}>
+        <Map2D
+          APIkey={process.env.NEXT_PUBLIC_GMAP_KEY || ""}
+          zoom={1}
+          markers={markers}
+        />
       </div>
     </div>
   );

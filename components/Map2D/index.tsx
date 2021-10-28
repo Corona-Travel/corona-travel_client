@@ -3,7 +3,6 @@ import GoogleMapReact from "google-map-react";
 
 import Marker from "components/Marker";
 
-
 type MapProps = {
   APIkey: string;
   zoom?: number;
@@ -32,17 +31,17 @@ class Map2D extends Component<MapProps, MapState> {
     const {
       APIkey,
       zoom = 0,
-      center = {"lng": 0, "lat": 0},
+      center = { lng: 0, lat: 0 },
       markers = [],
     } = this.props;
 
     return (
       <GoogleMapReact
-        bootstrapURLKeys = {{
+        bootstrapURLKeys={{
           key: APIkey,
         }}
-        defaultCenter = {center}
-        defaultZoom = {zoom}
+        defaultCenter={center}
+        defaultZoom={zoom}
       >
         {markers.map((marker: Marker) => (
           <Marker
@@ -50,15 +49,13 @@ class Map2D extends Component<MapProps, MapState> {
             key={marker.marker_id}
             // position
             {...marker.pos}
-
             name={marker.name}
             onClick={this.onMarkerClick(marker.marker_id, marker.place_id)}
           />
         ))}
-
       </GoogleMapReact>
-    )
+    );
   }
 }
 
-export default Map2D
+export default Map2D;
