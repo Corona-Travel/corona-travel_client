@@ -7,7 +7,7 @@ type MapProps = {
   APIkey: string;
   zoom?: number;
   center?: Position;
-  markers?: Array<Marker>;
+  markers?: Markers;
 };
 
 type MapState = {};
@@ -21,9 +21,9 @@ class Map2D extends Component<MapProps, MapState> {
     // this.onMarkerClick = this.onMarkerClick.bind(this);
   }
 
-  onMarkerClick(marker_id: string, place_id: string) {
+  onMarkerClick(place_id: string) {
     return (event: MouseEvent) => {
-      console.log(`marker ${marker_id} of place ${place_id} was clicked`);
+      console.log(`marker of place ${place_id} was clicked`);
     };
   }
 
@@ -46,11 +46,11 @@ class Map2D extends Component<MapProps, MapState> {
         {markers.map((marker: Marker) => (
           <Marker
             // rendering stuff
-            key={marker.marker_id}
+            key={marker.place_id}
             // position
             {...marker.pos}
             name={marker.name}
-            onClick={this.onMarkerClick(marker.marker_id, marker.place_id)}
+            onClick={this.onMarkerClick(marker.place_id)}
           />
         ))}
       </GoogleMapReact>

@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 import Map2D from "components/Map2D";
 
 // replace with data fetching
-const markers: Array<Marker> = [
+const markers: Markers = [
   {
     name: "Moscow",
     pos: {
@@ -14,7 +14,6 @@ const markers: Array<Marker> = [
       lng: 37.618423,
     },
     place_id: "0",
-    marker_id: "0",
   },
 ];
 
