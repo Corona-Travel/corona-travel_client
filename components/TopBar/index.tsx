@@ -1,7 +1,6 @@
 import { Component, Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { HiBell, HiMenu, HiX, HiGlobe, HiUser } from "react-icons/hi";
-import Image from "next/image";
+import { HiMenu, HiX, HiGlobe, HiUser } from "react-icons/hi";
 
 type TopBarProps = {
   navigation?: Navigations;
