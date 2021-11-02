@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
 import Map2D from "components/Map2D";
+import TopBar from "components/TopBar";
 
 // replace with data fetching
 const markers: Markers = [
@@ -19,21 +20,24 @@ const markers: Markers = [
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Corona Travel App</title>
-        {/* <link rel="icon" href="/favicon.ico" /> */}
-      </Head>
+    <>
+      <TopBar user={{}}/>
+      <div className={styles.container}>
+        <Head>
+          <title>Corona Travel App</title>
+          {/* <link rel="icon" href="/favicon.ico" /> */}
+        </Head>
 
-      <main className={styles.main}>🦠 Here will be our future web app</main>
-      <div style={{ height: "100vh", width: "100%" }}>
-        <Map2D
-          APIkey={process.env.NEXT_PUBLIC_GMAP_KEY || ""}
-          zoom={1}
-          markers={markers}
-        />
+        <main className={styles.main}>🦠 Here will be our future web app</main>
+        <div style={{ height: "100vh", width: "100%" }}>
+          <Map2D
+            APIkey={process.env.NEXT_PUBLIC_GMAP_KEY || ""}
+            zoom={1}
+            markers={markers}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

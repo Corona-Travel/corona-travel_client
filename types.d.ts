@@ -12,3 +12,15 @@ type Marker = {
 };
 
 type Markers = Array<Marker>;
+
+// internal types
+
+type UserInfo = {};
+
+type Navigation = {
+  name: string;
+  href: string;
+  current: boolean;
+};
+
+type Navigations = Array<Navigation>;
