@@ -21,7 +21,7 @@ const markers: Markers = [
 const Home: NextPage = () => {
   return (
     <>
-      <TopBar user={{}}/>
+      <TopBar user={{}} />
       <div className={styles.container}>
         <Head>
           <title>Corona Travel App</title>

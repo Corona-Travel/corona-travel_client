@@ -82,12 +82,15 @@ class TopBar extends Component<TopBarProps, TopBarState> {
                 {/* Show on the right */}
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   {/* Profile dropdown */}
-                  {(user != null) && (
+                  {user != null && (
                     <Menu as="div" className="ml-3 relative">
                       <div>
                         <Menu.Button className="">
                           <span className="sr-only">Open user menu</span>
-                          <HiUser className="block h-8 w-auto" aria-hidden="true"/>
+                          <HiUser
+                            className="block h-8 w-auto"
+                            aria-hidden="true"
+                          />
                         </Menu.Button>
                       </div>
                       <Transition
