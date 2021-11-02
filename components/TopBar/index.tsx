@@ -2,7 +2,7 @@ import { Component, Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { HiMenu, HiX, HiGlobe, HiUser } from "react-icons/hi";
 
-import ModeSwitcher from "components/ModeSwitcher";
+import { ModeSwitcher } from "components";
 
 type TopBarProps = {
   navigation?: Navigations;

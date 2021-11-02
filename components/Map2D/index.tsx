@@ -1,7 +1,7 @@
 import { Component, MouseEvent } from "react";
 import GoogleMapReact from "google-map-react";
 
-import Marker from "components/Marker";
+import { Marker } from "components";
 
 type MapProps = {
   APIkey: string;

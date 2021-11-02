@@ -3,8 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-import Map2D from "components/Map2D";
-import TopBar from "components/TopBar";
+import {Map2D, TopBar} from "components";
 
 // replace with data fetching
 const markers: Markers = [
@@ -29,13 +28,15 @@ const Home: NextPage = () => {
         </Head>
 
         <main className={styles.main}>🦠 Here will be our future web app</main>
-        <div style={{ height: "100vh", width: "100%" }}>
-          <Map2D
-            APIkey={process.env.NEXT_PUBLIC_GMAP_KEY || ""}
-            zoom={1}
-            markers={markers}
-          />
-        </div>
+        {/*
+          <div style={{ height: "100vh", width: "100%" }}>
+            <Map2D
+              APIkey={process.env.NEXT_PUBLIC_GMAP_KEY || ""}
+              zoom={1}
+              markers={markers}
+            />
+          </div>
+        */}
       </div>
     </>
   );
