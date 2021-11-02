@@ -33,9 +33,15 @@ const TopBar = (props: TopBarProps) => {
                 <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
-                    <HiX className="fill-current text-black dark:text-white block h-6 w-6" aria-hidden="true" />
+                    <HiX
+                      className="fill-current text-black dark:text-white block h-6 w-6"
+                      aria-hidden="true"
+                    />
                   ) : (
-                    <HiMenu className="fill-current text-black dark:text-white block h-6 w-6" aria-hidden="true" />
+                    <HiMenu
+                      className="fill-current text-black dark:text-white block h-6 w-6"
+                      aria-hidden="true"
+                    />
                   )}
                 </Disclosure.Button>
               </div>

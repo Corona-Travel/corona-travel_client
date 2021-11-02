@@ -32,9 +32,15 @@ const ModeSwitcher = () => {
   return (
     <button onClick={() => setDarkMode(!darkMode)}>
       {darkMode ? (
-        <HiMoon className="fill-current text-black dark:text-white block h-8 w-auto" aria-hidden="true" />
+        <HiMoon
+          className="fill-current text-black dark:text-white block h-8 w-auto"
+          aria-hidden="true"
+        />
       ) : (
-        <HiSun className="fill-current text-black dark:text-white block h-8 w-auto" aria-hidden="true" />
+        <HiSun
+          className="fill-current text-black dark:text-white block h-8 w-auto"
+          aria-hidden="true"
+        />
       )}
     </button>
   );
