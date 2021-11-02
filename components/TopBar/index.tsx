@@ -2,6 +2,8 @@ import { Component, Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { HiMenu, HiX, HiGlobe, HiUser } from "react-icons/hi";
 
+import ModeSwitcher from "components/ModeSwitcher";
+
 type TopBarProps = {
   navigation?: Navigations;
   user?: null | UserInfo;
@@ -17,7 +19,7 @@ const TopBar = (props: TopBarProps) => {
     user = null,
   } = props;
   return (
-    <Disclosure as="nav" className="bg-gray-200 bg-opacity-75">
+    <Disclosure as="nav" className="bg-gray-200 dark:bg-gray-800 bg-opacity-75">
       {({ open }) => (
         <>
           {/* wrapper for width */}
@@ -28,12 +30,12 @@ const TopBar = (props: TopBarProps) => {
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
                 {/* hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white */}
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:bg-gray-300">
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
-                    <HiX className="block h-6 w-6" aria-hidden="true" />
+                    <HiX className="fill-current text-black dark:text-white block h-6 w-6" aria-hidden="true" />
                   ) : (
-                    <HiMenu className="block h-6 w-6" aria-hidden="true" />
+                    <HiMenu className="fill-current text-black dark:text-white block h-6 w-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
               </div>
@@ -41,9 +43,9 @@ const TopBar = (props: TopBarProps) => {
                 {/* Icons */}
                 <div className="flex-shrink-0 flex items-center">
                   {/* will be shown always */}
-                  <HiGlobe className="block h-8 w-auto" />
+                  <HiGlobe className="fill-current text-black dark:text-white block h-8 w-auto" />
                   {/* will be shown not on small screens */}
-                  <span className="hidden sm:block px-3 w-auto text-gray-900">
+                  <span className="hidden sm:block px-3 w-auto text-gray-900 dark:text-gray-100">
                     Corona Travel
                   </span>
                 </div>
@@ -57,8 +59,8 @@ const TopBar = (props: TopBarProps) => {
                         className={`
                             ${
                               item.current
-                                ? "text-black"
-                                : "text-gray-800 hover:bg-gray-300 hover:text-black"
+                                ? "text-black dark:text-white"
+                                : "text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 hover:text-black dark:hover:text-white"
                             }
                             px-3 py-2 rounded-md text-sm font-medium
                           `}
@@ -72,6 +74,7 @@ const TopBar = (props: TopBarProps) => {
               </div>
               {/* Show on the right */}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <ModeSwitcher />
                 {/* Profile dropdown */}
                 {user != null && (
                   <Menu as="div" className="ml-3 relative">
@@ -79,7 +82,7 @@ const TopBar = (props: TopBarProps) => {
                       <Menu.Button className="">
                         <span className="sr-only">Open user menu</span>
                         <HiUser
-                          className="block h-8 w-auto"
+                          className="fill-current text-black dark:text-white block h-8 w-auto"
                           aria-hidden="true"
                         />
                       </Menu.Button>
@@ -93,14 +96,14 @@ const TopBar = (props: TopBarProps) => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-600 ring-1 ring-black dark:ring-gray-600 ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
                             <a
                               href="#"
                               className={`${
-                                active ? "bg-gray-100" : ""
-                              } block px-4 py-2 text-sm text-gray-700`}
+                                active ? "bg-gray-100 dark:bg-gray-900" : ""
+                              } block px-4 py-2 text-sm text-gray-700 dark:text-gray-300`}
                             >
                               View Profile
                             </a>
@@ -111,8 +114,8 @@ const TopBar = (props: TopBarProps) => {
                             <a
                               href="#"
                               className={`${
-                                active ? "bg-gray-100" : ""
-                              } block px-4 py-2 text-sm text-gray-700`}
+                                active ? "bg-gray-100 dark:bg-gray-900" : ""
+                              } block px-4 py-2 text-sm text-gray-700 dark:text-gray-300`}
                             >
                               Settings
                             </a>
@@ -123,8 +126,8 @@ const TopBar = (props: TopBarProps) => {
                             <a
                               href="#"
                               className={`${
-                                active ? "bg-gray-100" : ""
-                              } block px-4 py-2 text-sm text-gray-700`}
+                                active ? "bg-gray-100 dark:bg-gray-900" : ""
+                              } block px-4 py-2 text-sm text-gray-700 dark:text-gray-300`}
                             >
                               Sign out
                             </a>
@@ -148,8 +151,8 @@ const TopBar = (props: TopBarProps) => {
                   className={`
                       ${
                         item.current
-                          ? "bg-gray-500 text-black"
-                          : "text-gray-800 hover:bg-gray-600 hover:text-white"
+                          ? "bg-gray-500 text-black dark:text-white"
+                          : "text-gray-800 dark:text-gray-200 hover:bg-gray-600 dark:hover:bg-gray-400 hover:text-white dark:hover:text-white"
                       } block px-3 py-2 rounded-md text-base font-medium`}
                   aria-current={item.current ? "page" : undefined}
                 >
