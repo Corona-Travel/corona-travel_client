@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-import {Map2D, TopBar} from "components";
+import { Map2D, TopBar } from "components";
 
 // replace with data fetching
 const markers: Markers = [
