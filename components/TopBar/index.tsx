@@ -1,23 +1,42 @@
 import { Component, Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { HiMenu, HiX, HiGlobe, HiUser } from "react-icons/hi";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { ModeSwitcher } from "components";
 
 type TopBarProps = {
   navigation?: Navigations;
   user?: null | UserInfo;
+  href?: any;
+  as?: any;
 };
 
 const TopBar = (props: TopBarProps) => {
   const {
     navigation = [
-      { name: "Map", href: "/map", current: true },
-      { name: "Quizes", href: "/quizes", current: false },
-      { name: "Journeys", href: "/journeys", current: false },
+      { name: "Map", href: "/map" },
+      { name: "Quizes", href: "/quizes" },
+      { name: "Journeys", href: "/journeys" },
     ],
     user = null,
   } = props;
+
+  const { asPath } = useRouter();
+
+  const navigationWithCurrent: NavigationsWithCurrent = [];
+
+  for (let nav of navigation) {
+    // let navWithCur: NavigationWithCurrent = {"name": nav.name, "href": nav.href, "current": nav.current}
+    navigationWithCurrent.push({
+      // name: nav["name"],
+      // href: nav["href"],
+      ...nav,
+      current: asPath === nav["href"],
+    });
+  }
+
   return (
     <Disclosure as="nav" className="bg-gray-200 dark:bg-gray-800 bg-opacity-75">
       {({ open }) => (
@@ -29,7 +48,6 @@ const TopBar = (props: TopBarProps) => {
               {/* Show burger for small screens */}
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                {/* hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white */}
                 <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -47,33 +65,41 @@ const TopBar = (props: TopBarProps) => {
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 {/* Icons */}
-                <div className="flex-shrink-0 flex items-center">
-                  {/* will be shown always */}
-                  <HiGlobe className="fill-current text-black dark:text-white block h-8 w-auto" />
-                  {/* will be shown not on small screens */}
-                  <span className="hidden sm:block px-3 w-auto text-gray-900 dark:text-gray-100">
-                    Corona Travel
-                  </span>
-                </div>
-                {/* Links that are shown on not small screens */}
+                <Link href="/">
+                  <div className={`
+                    ${asPath === "/" ? "bg-gray-300 dark:bg-gray-700" : "" }
+                    flex-shrink-0 flex items-center hover:bg-gray-300 dark:hover:bg-gray-700 rounded cursor-pointer
+                  `}>
+                    {/* will be shown always */}
+                    <HiGlobe className="fill-current text-black dark:text-white block h-8 w-auto" />
+                    {/* will be shown not on small screens */}
+                    <div className="hidden sm:block px-3 w-auto text-gray-900 dark:text-gray-100">
+                      Corona Travel
+                    </div>
+                  </div>
+                </Link>
+                {/* Links that are shown on NOT small screens */}
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
+                    {navigationWithCurrent.map((item) => (
+                      <Link
                         href={item.href}
-                        className={`
-                            ${
-                              item.current
-                                ? "text-black dark:text-white"
-                                : "text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 hover:text-black dark:hover:text-white"
-                            }
-                            px-3 py-2 rounded-md text-sm font-medium
-                          `}
+                        key={item.name}
                         aria-current={item.current ? "page" : undefined}
                       >
-                        {item.name}
-                      </a>
+                        <div
+                          className={`
+                            ${
+                              item.current
+                              ? "text-black dark:text-white bg-gray-300 dark:bg-gray-700"
+                              : "text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 hover:text-black dark:hover:text-white"
+                            }
+                            px-3 py-2 rounded-md text-sm font-medium cursor-pointer
+                          `}
+                        >
+                          {item.name}
+                        </div>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -147,9 +173,10 @@ const TopBar = (props: TopBarProps) => {
             </div>
           </div>
 
+          {/* mobile only buttons */}
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
+              {navigationWithCurrent.map((item) => (
                 <Disclosure.Button
                   key={item.name}
                   as="a"
@@ -159,7 +186,7 @@ const TopBar = (props: TopBarProps) => {
                         item.current
                           ? "bg-gray-500 text-black dark:text-white"
                           : "text-gray-800 dark:text-gray-200 hover:bg-gray-600 dark:hover:bg-gray-400 hover:text-white dark:hover:text-white"
-                      } block px-3 py-2 rounded-md text-base font-medium`}
+                      } block pl-3 pr-4 py-2 rounded-md text-base font-medium`}
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}

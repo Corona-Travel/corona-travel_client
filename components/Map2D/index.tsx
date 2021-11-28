@@ -4,10 +4,10 @@ import GoogleMapReact from "google-map-react";
 import { Marker } from "components";
 
 type MapProps = {
-  APIkey: string;
+  API_key: string;
   zoom?: number;
   center?: Position;
-  markers?: Markers;
+  markers?: Markers2D;
 };
 
 function onMarkerClick(place_id: string) {
@@ -17,17 +17,21 @@ function onMarkerClick(place_id: string) {
 }
 
 const Map2D = (props: MapProps) => {
-  const { APIkey, zoom = 0, center = { lng: 0, lat: 0 }, markers = [] } = props;
+  const {
+    API_key,
+    zoom = 0,
+    center = { lng: 0, lat: 0 },
+    markers = [],
+  } = props;
 
   return (
     <GoogleMapReact
       bootstrapURLKeys={{
-        key: APIkey,
+        key: API_key,
       }}
-      defaultCenter={center}
       defaultZoom={zoom}
     >
-      {markers.map((marker: Marker) => (
+      {markers.map((marker: Marker2D) => (
         <Marker
           // rendering stuff
           key={marker.place_id}

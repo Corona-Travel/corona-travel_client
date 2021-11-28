@@ -17,29 +17,20 @@ const markers: Markers = [
   },
 ];
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   return (
     <>
       <TopBar user={{}} />
       <div className={styles.container}>
         <Head>
-          <title>Corona Travel App</title>
+          <title>Corona Travel App - map</title>
           {/* <link rel="icon" href="/favicon.ico" /> */}
         </Head>
 
         <main className={styles.main}>🦠 Here will be our future web app</main>
-        {/*
-          <div style={{ height: "100vh", width: "100%" }}>
-            <Map2D
-              APIkey={process.env.NEXT_PUBLIC_GMAP_KEY || ""}
-              zoom={1}
-              markers={markers}
-            />
-          </div>
-        */}
       </div>
     </>
   );
 };
 
-export default Home;
+export default HomePage;

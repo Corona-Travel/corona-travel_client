@@ -7,7 +7,6 @@ import { render, screen } from "@testing-library/react";
 import ModeSwitcher from "./index";
 
 describe("ModeSwitcher", () => {
-
   it("renders a button", () => {
     render(<ModeSwitcher />);
 
