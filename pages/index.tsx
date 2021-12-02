@@ -3,19 +3,8 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-import { Map2D, TopBar } from "components";
+import { TopBar } from "components";
 
-// replace with data fetching
-const markers: Markers = [
-  {
-    name: "Moscow",
-    pos: {
-      lat: 55.751244,
-      lng: 37.618423,
-    },
-    place_id: "0",
-  },
-];
 
 const HomePage: NextPage = () => {
   return (

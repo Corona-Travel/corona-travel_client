@@ -1,11 +1,16 @@
 import React from "react";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import {Loader} from '@googlemaps/js-api-loader';
+import Head from "next/head";
+import Script from 'next/script'
 
 type MapProps = {
-  apiKey: string;
   markers2D?: Markers2D;
   markers3D?: Markers3D;
+};
+
+type WrappedMapProps = MapProps & {
+  apiKey: string;
 };
 
 function onMarkerClick(place_id: string) {
@@ -40,7 +45,7 @@ const Marker: React.Component<google.maps.MarkerOptions> = (options: any) => {
 };
 
 const Map = (props: MapProps) => {
-  const { apiKey, markers2D = [], markers3D = [] } = props;
+  const { markers2D = [], markers3D = [] } = props;
   // console.table(markers2D);
   // console.table(markers3D);
 
@@ -49,18 +54,35 @@ const Map = (props: MapProps) => {
 
   React.useEffect(() => {
     if (ref.current && !map) {
-      new Loader({
-        apiKey: apiKey,
-        // version: 'weekly',
-      }).load().then(() => {
-        setMap(
-          new google.maps.Map(ref.current!, {})
-        )
-      });
+      let map = new window.google.maps.Map(
+        ref.current,
+        {
+          center: new google.maps.LatLng(-34.397, 150.644), //55.751244, 37.618423),
+          zoom: 1,
+          minZoom: 1,
+        }
+      );
+      map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
+      setMap(map);
     }
   }, [ref, map]);
 
-  return <div ref={ref} style={{width: "100%", height: "300px"}} />
+  return (
+    <div id="map" ref={ref} className="w-full h-3/5">
+    </div>
+  )
 };
 
-export default Map
+const render = (status: Status) => {
+  return <>{status}</>;
+};
+
+const WrappedMap = ({apiKey, markers2D, markers3D}: WrappedMapProps) => {
+  return (
+  <Wrapper apiKey={apiKey} render={render}>
+    <Map markers2D={markers2D} markers3D={markers3D}/>
+  </Wrapper>
+  );
+}
+
+export default WrappedMap
