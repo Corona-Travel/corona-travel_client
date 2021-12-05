@@ -1,6 +1,13 @@
 import React from "react";
 
-const Marker = (options: any) => {
+interface MarkerProps extends google.maps.MarkerOptions {
+  onClick: () => any;
+}
+
+const Marker = (options: MarkerProps) => {
+  console.log("marker");
+  console.table(options);
+
   const [marker, setMarker] = React.useState<google.maps.Marker>();
 
   // create marker on startup
@@ -21,6 +28,9 @@ const Marker = (options: any) => {
   React.useEffect(() => {
     if (marker) {
       marker.setOptions(options);
+      marker.addListener("click", () => {
+        options.onClick();
+      });
     }
   }, [marker, options]);
 
@@ -28,4 +38,4 @@ const Marker = (options: any) => {
   return null;
 };
 
-export default Marker
+export default Marker;
