@@ -5,7 +5,6 @@ import styles from "../styles/Home.module.css";
 
 import { TopBar } from "components";
 
-
 const HomePage: NextPage = () => {
   return (
     <>

@@ -19,7 +19,6 @@ type Marker3D = {
 
 type Markers3D = Array<Marker3D>;
 
-
 // internal types
 
 type UserInfo = {};

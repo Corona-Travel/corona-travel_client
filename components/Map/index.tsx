@@ -1,17 +1,16 @@
 import React from "react";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import {Loader} from '@googlemaps/js-api-loader';
-import Head from "next/head";
-import Script from 'next/script'
 
-type MapProps = {
-  markers2D?: Markers2D;
+import Marker from "./marker"
+
+interface MapProps {
   markers3D?: Markers3D;
-};
+}
 
-type WrappedMapProps = MapProps & {
+interface WrappedMapProps extends MapProps {
   apiKey: string;
-};
+  markers2D?: Markers2D;
+}
 
 function onMarkerClick(place_id: string) {
   return (event: MouseEvent) => {
@@ -19,34 +18,9 @@ function onMarkerClick(place_id: string) {
   };
 }
 
-const Marker: React.Component<google.maps.MarkerOptions> = (options: any) => {
-  const [marker, setMarker] = React.useState<google.maps.Marker>();
 
-  React.useEffect(() => {
-    if (!marker) {
-      setMarker(new google.maps.Marker());
-    }
-
-    // remove marker from map on unmount
-    return () => {
-      if (marker) {
-        marker.setMap(null);
-      }
-    };
-  }, [marker]);
-
-  React.useEffect(() => {
-    if (marker) {
-      marker.setOptions(options);
-    }
-  }, [marker, options]);
-
-  return null;
-};
-
-const Map = (props: MapProps) => {
-  const { markers2D = [], markers3D = [] } = props;
-  // console.table(markers2D);
+const Map = (props: React.PropsWithChildren<MapProps>) => {
+  const { markers3D = [], children } = props;
   // console.table(markers3D);
 
   const ref = React.useRef<HTMLDivElement>(null);
@@ -54,35 +28,55 @@ const Map = (props: MapProps) => {
 
   React.useEffect(() => {
     if (ref.current && !map) {
-      let map = new window.google.maps.Map(
-        ref.current,
-        {
-          center: new google.maps.LatLng(-34.397, 150.644), //55.751244, 37.618423),
+      setMap(
+        new window.google.maps.Map(ref.current, {
+          // center: new google.maps.LatLng(-34.397, 150.644),
+          // center: new google.maps.LatLng(55.751244, 37.618423),
+          center: new google.maps.LatLng(0, 0),
           zoom: 1,
-          minZoom: 1,
-        }
+          // minZoom: 1,
+          // draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true,
+          mapTypeControl: false,
+          streetViewControl: false,
+          gestureHandling: "cooperative",
+        }),
       );
-      map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
-      setMap(map);
     }
   }, [ref, map]);
 
-  return (
-    <div id="map" ref={ref} className="w-full h-3/5">
-    </div>
-  )
+
+
+  return (<div id="map" ref={ref} className="w-full h-full">
+    {React.Children.map(children, (child) => {
+      if (React.isValidElement(child)) {
+        // set the map prop on the child component
+        return React.cloneElement(child, { map });
+      }
+    })}
+
+  </div>)
 };
 
 const render = (status: Status) => {
-  return <>{status}</>;
+  return <span>{status}</span>;
 };
 
-const WrappedMap = ({apiKey, markers2D, markers3D}: WrappedMapProps) => {
-  return (
-  <Wrapper apiKey={apiKey} render={render}>
-    <Map markers2D={markers2D} markers3D={markers3D}/>
-  </Wrapper>
-  );
-}
+const WrappedMap = (props: WrappedMapProps) => {
+  const { apiKey, markers2D = [], markers3D = [] } = props;
 
-export default WrappedMap
+  console.table(markers2D);
+
+  return (
+    <div className="w-full" style={{ height: "90vh" }}>
+      <Wrapper apiKey={apiKey} render={render}>
+        <Map markers3D={markers3D}>
+          {markers2D.map(marker2D => {
+            <Marker />
+          })}
+        </Map>
+      </Wrapper>
+    </div>
+  );
+};
+
+export default WrappedMap;
