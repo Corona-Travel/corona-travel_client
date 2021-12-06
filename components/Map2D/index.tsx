@@ -43,13 +43,7 @@ const Map2D = (props: React.PropsWithChildren<Map2DProps>) => {
   );
 };
 
-function onMarkerClick(place_id: string) {
-  const router = useRouter()
 
-  return () => {
-    console.log(`marker of place ${place_id} was clicked`);
-  };
-}
 
 const render = (status: Status) => {
   return <span>{status}</span>;
@@ -63,6 +57,13 @@ interface WrappedMap2DProps {
 const WrappedMap = (props: WrappedMap2DProps) => {
   const { apiKey, markers2D = [] } = props;
 
+  const router = useRouter()
+
+  const onMarkerClick = (marker2D: Marker2D) => () => {
+    console.log(`marker of place ${marker2D.place_id} was clicked`)
+    router.push(`/panorama/${marker2D.pos[0]}/${marker2D.pos[1]}`)
+  }
+
   return (
     <div className="w-full" style={{ height: "90vh" }}>
       <Wrapper apiKey={apiKey} render={render}>
@@ -75,7 +76,7 @@ const WrappedMap = (props: WrappedMap2DProps) => {
                 lng: marker2D.pos[1],
               }}
               label={marker2D.name}
-              onClick={onMarkerClick(marker2D.place_id)}
+              onClick={() => onMarkerClick(marker2D)}
             />
           ))}
         </Map2D>

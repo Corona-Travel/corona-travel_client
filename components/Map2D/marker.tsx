@@ -28,9 +28,7 @@ const Marker = (options: MarkerProps) => {
   React.useEffect(() => {
     if (marker) {
       marker.setOptions(options);
-      marker.addListener("click", () => {
-        options.onClick();
-      });
+      marker.addListener("click", options.onClick());
     }
   }, [marker, options]);
 

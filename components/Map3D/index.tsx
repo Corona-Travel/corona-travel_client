@@ -19,28 +19,19 @@ const Map3D = (props: Map3DProps) => {
   const [panorama, setPanorama] = React.useState<google.maps.StreetViewPanorama>();
   const [markers, setMarkers] = React.useState<google.maps.Marker[]>();
 
-  const handlePositionChange = () => {
-    if (panorama) {
-      const new_pos = panorama.getPosition();
-      console.log(new_pos);
-
-    }
-  }
-
   React.useEffect(() => {
     if (ref.current && !panorama) {
-      const map = new window.google.maps.Map(ref.current, {
-        center: {lat: start_lat, lng: start_lng},
-        zoom: 0,
+      const map = new window.google.maps.Map(ref.current, {})
+      const p = map.getStreetView()!
+      p.setOptions({
+        visible: true,
+        position: {lat: start_lat, lng: start_lng},
+        enableCloseButton: false,
       })
-      const p = map.getStreetView()
-      p.setVisible(true)
-      p.setPosition({lat: start_lat, lng: start_lng})
-      p.setPov({
-        heading: 34,
-        pitch: 10,
+      p.addListener("position_changed", () => {
+        const new_pos = p.getPosition()!;
+        console.log("new position:", {lat: new_pos.lat(), lng: new_pos.lng()});
       })
-      p.addListener("position_changed", handlePositionChange)
       setPanorama(p)
     }
   }, [ref, panorama])
