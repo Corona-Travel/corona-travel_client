@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "label": "npm: dev",
+      "detail": "next dev"
+    },
+    {
+      "type": "npm",
+      "script": "fix",
+      "problemMatcher": [],
+      "label": "npm: fix",
+      "detail": "fix with pretier, stylelint and (next) elsint"
+    }
+  ]
+}
