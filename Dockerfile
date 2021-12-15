@@ -8,7 +8,8 @@ RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 WORKDIR /ctc
 
 ARG GMAP_KEY_SECRET=""
-ENV NEXT_PUBLIC_API_URL http://3.12.143.140:8080/
+ARG API_URL=http://localhost:8080/
+ENV NEXT_PUBLIC_API_URL=$API_URL
 ENV NEXT_PUBLIC_GMAP_KEY=$GMAP_KEY_SECRET
 
 COPY ./package.json .
