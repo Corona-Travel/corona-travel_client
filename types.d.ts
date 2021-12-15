@@ -10,10 +10,16 @@ type Marker2D = {
 
 type Markers2D = Array<Marker2D>;
 
+enum Marker3DType {
+  fact = "fact",
+  media = "media",
+  quiz = "quiz",
+}
+
 type Marker3D = {
   pos: Position;
   name: string;
-  type: string;
+  type: Marker3DType;
   marker_id: string;
 };
 
@@ -36,3 +42,5 @@ type NavigationWithCurrent = {
 
 type Navigations = Array<Navigation>;
 type NavigationsWithCurrent = Array<NavigationWithCurrent>;
+
+declare module "react-alert-template-basic";

@@ -7,3 +7,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
+#__react-alert__ > div > div > div {
+  text-transform: none !important;
+}
