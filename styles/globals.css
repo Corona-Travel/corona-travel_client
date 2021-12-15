@@ -10,4 +10,5 @@ body {
 
 #__react-alert__ > div > div > div {
   text-transform: none !important;
+  width: auto !important;
 }

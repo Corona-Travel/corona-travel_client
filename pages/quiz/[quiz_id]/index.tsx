@@ -8,9 +8,11 @@ import axios from "axios";
 const fetcher = async (url: string) => fetch(url).then((res) => res.json());
 
 const QuizPage: NextPageWithTitle = () => {
-  const [formData, setFormData] = React.useState<{[key: string]: string}>({});
+  const [formData, setFormData] = React.useState<{ [key: string]: string }>({});
 
-  const alert = useAlert()
+  const alert = useAlert();
+  // @ts-ignore
+  alert.removeAll();
 
   const router = useRouter();
   const { quiz_id } = router.query;
@@ -24,41 +26,55 @@ const QuizPage: NextPageWithTitle = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     if (Object.keys(formData).length < quiz!.questions.length) {
-      alert.show("Please answer all questions", {type: "error"})
+      alert.error("Please answer all questions");
+    } else {
+      let answers: string[] = [];
+      quiz!.questions.forEach((el) => {
+        answers.push(formData[el.question]);
+      });
+
+      // @ts-ignore
+      alert.removeAll();
+
+      console.log(formData);
+      console.log({
+        quiz_id: quiz_id,
+        answers,
+      });
+
+      axios
+        .post(
+          `${
+            process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/"
+          }quiz_manager/quiz_manager/${quiz_id}`,
+          {
+            quiz_id: quiz_id,
+            answers,
+          },
+        )
+        .then((res) => {
+          console.log(res.data);
+          alert.show(
+            <div>
+              <p>Your score: {res.data.score}</p>
+              <p>Percentage correct: {res.data.percentage}</p>
+              <span>Detailed explanation:</span>
+              {res.data.explanation.map((explanation: any) => {
+                if (explanation.correct_answer !== explanation.users_answer) {
+                  return (
+                    <p className="pt-2">
+                      You answered: {explanation.correct_answer}, but the correct
+                      answer is {explanation.users_answer}
+                    </p>
+                  );
+                }
+              })}
+            </div>,
+          );
+        });
+
     }
 
-    let answers: string[] = []
-    quiz!.questions.forEach((el) => {
-      answers.push(formData[el.question])
-    })
-
-    console.log(formData)
-    console.log({
-      quiz_id: quiz_id,
-      answers,
-    })
-
-    axios.post(`${
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/"
-    }quiz_manager/quiz_manager/${quiz_id}`, {
-      quiz_id: quiz_id,
-      answers,
-    }).then(res => {
-      console.log(res.data)
-      alert.show(
-        <div>
-          <p>Your score: {res.data.score}</p>
-          <p>Percentage correct: {res.data.percentage}</p>
-          <span>Detailed explanation:</span>
-          {res.data.explanation.map((explanation: any) => {
-            if (explanation.correct_answer !== explanation.users_answer) {
-              return <p className="pt-2">You answered: {explanation.correct_answer}, but the correct answer is {explanation.users_answer}</p>
-            }
-          })}
-
-        </div>
-      )
-    })
 
     event.preventDefault();
   };
@@ -71,7 +87,7 @@ const QuizPage: NextPageWithTitle = () => {
     let new_formData = formData;
     new_formData[name] = value;
     setFormData(new_formData);
-    console.log(formData)
+    console.log(formData);
   };
 
   if (!quiz_id) return <div>Processing path</div>;
@@ -84,24 +100,25 @@ const QuizPage: NextPageWithTitle = () => {
         {quiz.questions.map((question, question_index) => (
           <div className="pt-3" key={question_index}>
             <fieldset className="border-solid border-gray-300 border-2">
-              <legend className="text-white bg-black">
+              <legend className="text-white bg-black ml-5 pl-1">
                 {question.question}
               </legend>
 
               {question.answers.map((answer, answer_index) => (
-                <div key={answer_index}>
+                <div key={answer_index} className="pl-1">
                   <input
                     id={`${answer.option}-${question_index}`}
                     name={question.question}
                     type="radio"
                     value={answer.option}
                     onChange={handleChange}
-                    className="pl-3"
+
                   />
-                  <label htmlFor={`${answer.option}-${question_index}`}>{answer.option}</label>
+                  <label htmlFor={`${answer.option}-${question_index}`} className="pl-1">
+                    {answer.option}
+                  </label>
                 </div>
               ))}
-
             </fieldset>
           </div>
         ))}
