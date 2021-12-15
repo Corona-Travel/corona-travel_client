@@ -2,6 +2,8 @@
 
 type Position = [numebr, number];
 
+// maps
+
 type Marker2D = {
   name: string;
   pos: Position;
@@ -23,7 +25,28 @@ type Marker3D = {
   marker_id: string;
 };
 
-type Markers3D = Array<Marker3D>;
+type Markers3D = Marker3D[];
+
+// quizzes
+
+type Answer = {
+  option: string;
+  correct: boolean;
+};
+
+type Question = {
+  question: string;
+  answers: Answer[];
+};
+
+type Quiz = {
+  name: string;
+  pos: Position;
+  questions: Question[];
+  quiz_id: string;
+};
+
+type Quizzes = Quiz[];
 
 // internal types
 

@@ -43,7 +43,7 @@ const Map3D = (props: Map3DProps) => {
       p.setPosition({ lng: start_lng, lat: start_lat });
       setPanorama(p);
     }
-  }, [map_ref, map, panorama]);
+  }, [start_lng, start_lat, map_ref, map, panorama]);
 
   React.useEffect(() => {
     let markers: google.maps.Marker[] = [];
@@ -126,7 +126,7 @@ const Map3D = (props: Map3DProps) => {
         marker.setMap(null);
       }
     };
-  }, [map, panorama]);
+  }, [map, panorama, alert]);
 
   return (
     <>
