@@ -39,8 +39,6 @@ async function processMarkers({
         )
         .then((res) => {
           const data = res.data;
-          data["type"] = "audio"
-          data["url"] = "https://cdn.pixabay.com/download/audio/2021/10/23/audio_15e5f8466c.mp3?filename=christmas-cinematic-dream-piano-9784.mp3"
           console.log(data)
           return (
             <div>
