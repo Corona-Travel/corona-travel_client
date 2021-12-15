@@ -17,8 +17,8 @@ const TopBar = (props: TopBarProps) => {
   const {
     navigation = [
       { name: "Map", href: "/map" },
-      { name: "Quizes", href: "/quizes" },
-      { name: "Journeys", href: "/journeys" },
+      { name: "Quizzes", href: "/quizzes" },
+      // { name: "Journeys", href: "/journeys" },
     ],
     user = null,
   } = props;

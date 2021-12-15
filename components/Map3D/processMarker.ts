@@ -1,7 +1,13 @@
 import axios from "axios";
 import parse from "html-react-parser";
 
-async function processMarkers({ type, id }: { type: string; id: string }): Promise<string> {
+async function processMarkers({
+  type,
+  id,
+}: {
+  type: string;
+  id: string;
+}): Promise<string> {
   console.log(type, id);
 
   let to_resolve: any;
@@ -16,10 +22,10 @@ async function processMarkers({ type, id }: { type: string; id: string }): Promi
         )
         .then((res) => res.data.description)
         .catch((e) => console.log(e))
-        .then(m => {
-          const el = parse(m)
-          return el
-        })
+        .then((m) => {
+          const el = parse(m);
+          return el;
+        });
 
       break;
     case "media":
@@ -31,10 +37,10 @@ async function processMarkers({ type, id }: { type: string; id: string }): Promi
         )
         .then((res) => res.data.description)
         .catch((e) => console.log(e))
-        .then(m => {
-          const el = parse(m)
-          return el
-        })
+        .then((m) => {
+          const el = parse(m);
+          return el;
+        });
       break;
     case "quiz":
       to_resolve = await axios
@@ -45,10 +51,10 @@ async function processMarkers({ type, id }: { type: string; id: string }): Promi
         )
         .then((res) => res.data.description)
         .catch((e) => console.log(e))
-        .then(m => {
-          const el = parse(m)
-          return el
-        })
+        .then((m) => {
+          const el = parse(m);
+          return el;
+        });
       break;
     default:
       break;

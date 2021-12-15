@@ -107,12 +107,9 @@ const Map3D = (props: Map3DProps) => {
                 processMarkers({
                   type: marker3D["type"],
                   id: marker3D["marker_id"],
-                }).then(m => {
-                  alert.show(
-                    m
-                  );
-                })
-
+                }).then((m) => {
+                  alert.show(m);
+                });
               });
 
               markers.push(marker);
