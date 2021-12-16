@@ -9,6 +9,7 @@ WORKDIR /ctc
 
 COPY ./package.json .
 COPY ./pnpm-lock.yaml .
+COPY ./cache .
 RUN pnpm install
 
 COPY . .

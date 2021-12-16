@@ -2,6 +2,8 @@
 
 type Position = [numebr, number];
 
+// maps
+
 type Marker2D = {
   name: string;
   pos: Position;
@@ -10,14 +12,41 @@ type Marker2D = {
 
 type Markers2D = Array<Marker2D>;
 
+enum Marker3DType {
+  fact = "fact",
+  media = "media",
+  quiz = "quiz",
+}
+
 type Marker3D = {
   pos: Position;
   name: string;
-  type: string;
+  type: Marker3DType;
   marker_id: string;
 };
 
-type Markers3D = Array<Marker3D>;
+type Markers3D = Marker3D[];
+
+// quizzes
+
+type Answer = {
+  option: string;
+  correct: boolean;
+};
+
+type Question = {
+  question: string;
+  answers: Answer[];
+};
+
+type Quiz = {
+  name: string;
+  pos: Position;
+  questions: Question[];
+  quiz_id: string;
+};
+
+type Quizzes = Quiz[];
 
 // internal types
 
@@ -36,3 +65,5 @@ type NavigationWithCurrent = {
 
 type Navigations = Array<Navigation>;
 type NavigationsWithCurrent = Array<NavigationWithCurrent>;
+
+declare module "react-alert-template-basic";

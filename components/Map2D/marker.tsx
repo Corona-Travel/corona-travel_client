@@ -5,9 +5,6 @@ interface MarkerProps extends google.maps.MarkerOptions {
 }
 
 const Marker = (options: MarkerProps) => {
-  console.log("marker");
-  console.table(options);
-
   const [marker, setMarker] = React.useState<google.maps.Marker>();
 
   // create marker on startup

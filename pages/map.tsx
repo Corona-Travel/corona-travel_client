@@ -1,53 +1,31 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-// import styles from "../styles/Map.module.css";
+import type { NextPageWithTitle } from "./_app";
 import useSWR from "swr";
 
-import { Map2D, TopBar } from "components";
+import { Map2D } from "components";
 
 // replace with data fetching
 
-const Map2DPage: NextPage = () => {
-  const markers2D: Markers2D = [
-    {
-      name: "Moscow",
-      pos: [55.751244, 37.618423],
-      place_id: "0",
-    },
-    {
-      name: "Moscow_точный",
-      pos: [55.754093, 37.620407],
-      place_id: "1",
-    },
-    {
-      name: "Moscow_ссылка_1",
-      pos: [55.7545977, 37.6188742],
-      place_id: "2",
-    },
-    {
-      name: "Moscow_ссылка_2",
-      pos: [55.7539303, 37.620795],
-      place_id: "2",
-    },
-  ]
-  // useSWR<Markers2D, any>("/api/map/2D", (url: string) =>
-  // fetch(url).then((res) => res.json()),
-  // )["data"];
+const fetcher = async (url: string) => fetch(url).then((res) => res.json());
+// const fetcher = async (url: string) => await Axios.get(url).then((res) => res.data);
 
+const Map2DPage: NextPageWithTitle = () => {
+  const { data: markers2D, error } = useSWR<Markers2D>(
+    `${
+      process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/"
+    }map_2d/map/2D`,
+    fetcher,
+  );
+
+  if (error) return <div>failed to load</div>;
+  if (!markers2D) return <div>loading...</div>;
   return (
-    <>
-      <Head>
-        <title>Corona Travel App - Map</title>
-        {/* <link rel="icon" href="/favicon.ico" /> */}
-      </Head>
-      <TopBar user={{}} />
+    <Map2D
+      apiKey={process.env.NEXT_PUBLIC_GMAP_KEY || ""}
+      markers2D={markers2D}
+    />
+  );
+};
 
-      <Map2D
-        apiKey={process.env.NEXT_PUBLIC_GMAP_KEY || ""}
-        markers2D={markers2D}
-      />
-    </>
-  )
-}
+Map2DPage.title = "Corona Travel / Map";
 
-export default Map2DPage
+export default Map2DPage;

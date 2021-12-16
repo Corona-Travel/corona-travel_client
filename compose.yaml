@@ -1,0 +1,115 @@
+networks:
+  frontend:
+  backend:
+
+services:
+  front:
+    build:
+      dockerfile: ./Dockerfile
+    command: pnpm run dev
+    volumes:
+      - ".:/cts/:z"
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      nginx:
+        condition: service_healthy
+    ports:
+      - 80:3000
+
+  nginx:
+    image: nginx:1.21
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    healthcheck:
+      test: service nginx status || exit 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    ports:
+      - 8080:80
+      - 443:443
+    networks:
+      - backend
+
+  mongo:
+    image: mongo:5
+    networks:
+      - backend
+    volumes:
+      - "./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js"
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/corona_travel --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    ports:
+      - 27017:27017
+
+  facts:
+    image: ghcr.io/corona-travel/facts:latest
+    command: uvicorn --host 0.0.0.0 --port 1234 facts.app:app --root-path /facts
+    environment:
+      MONGO_URL: mongodb://mongo/corona_travel
+      LOG_LEVEL: DEBUG
+    networks:
+      - backend
+
+  media:
+    image: ghcr.io/corona-travel/media:latest
+    command: uvicorn --host 0.0.0.0 --port 1234 media.app:app --root-path /media
+    environment:
+      MONGO_URL: mongodb://mongo/corona_travel
+      LOG_LEVEL: DEBUG
+    networks:
+      - backend
+
+  places:
+    image: ghcr.io/corona-travel/places:latest
+    command: uvicorn --host 0.0.0.0 --port 1234 places.app:app --root-path /places
+    environment:
+      MONGO_URL: mongodb://mongo/corona_travel
+      LOG_LEVEL: DEBUG
+    networks:
+      - backend
+
+  quizzes:
+    image: ghcr.io/corona-travel/quizzes:latest
+    command: uvicorn --host 0.0.0.0 --port 1234 quizzes.app:app --root-path /quizzes
+    environment:
+      MONGO_URL: mongodb://mongo/corona_travel
+      LOG_LEVEL: DEBUG
+    networks:
+      - backend
+
+  map_2d:
+    image: ghcr.io/corona-travel/map_2d:latest
+    command: uvicorn --host 0.0.0.0 --port 1234 map_2d.app:app --root-path /map_2d
+    environment:
+      LOG_LEVEL: DEBUG
+      PLACES_URL: http://places:1234/
+    networks:
+      - backend
+
+  map_3d:
+    image: ghcr.io/corona-travel/map_3d:latest
+    command: uvicorn --host 0.0.0.0 --port 1234 map_3d.app:app --root-path /map_3d
+    environment:
+      LOG_LEVEL: DEBUG
+      FACTS_URL: http://facts:1234/
+      MEDIA_URL: http://media:1234/
+      QUIZZES_URL: http://quizzes:1234/
+    networks:
+      - backend
+
+  quiz_manager:
+    image: ghcr.io/corona-travel/quiz_manager:latest
+    command: uvicorn --host 0.0.0.0 --port 1234 quiz_manager.app:app --root-path /quiz_manager
+    environment:
+      QUIZZES_URL: http://quizzes:1234/
+      LOG_LEVEL: DEBUG
+    networks:
+      - backend
