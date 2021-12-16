@@ -13,7 +13,7 @@ const Layout = ({ title, children }: PropsWithChildren<LayoutProps>) => {
         <title>{title}</title>
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <TopBar user={{}} />
+      <TopBar/>
       {children}
     </>
   );
