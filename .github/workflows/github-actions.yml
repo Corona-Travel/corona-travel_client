@@ -2,7 +2,7 @@ name: Build Docker Image of frontend
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main, dev, hot-fix]
 
 jobs:
   build:
