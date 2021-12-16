@@ -125,7 +125,7 @@ const QuizPage: NextPageWithTitle = () => {
               </legend>
 
               {question.answers.map((answer, answer_index) => (
-                <div key={answer_index} className="pl-1 mt-1">
+                <div key={answer_index} className="pl-1 my-1">
                   <input
                     id={`${answer.option}-${question_index}`}
                     name={question.question}
