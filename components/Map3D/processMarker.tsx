@@ -64,7 +64,7 @@ async function processMarkers({
           console.log(data)
           return (
             <div>
-              <p>Quiz "{data.name}"</p>
+              <p>Quiz &quot;{data.name}&quot;</p>
               <Link href={`/quiz/${data.quiz_id}`}>Click here to take a quiz</Link>
             </div>
           )

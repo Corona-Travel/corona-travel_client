@@ -65,7 +65,7 @@ const TopBar = (props: TopBarProps) => {
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 {/* Icons */}
-                <Link href="/">
+                <Link href="/" passHref>
                   <div
                     className={`
                     ${asPath === "/" ? "bg-gray-300 dark:bg-gray-700" : ""}
@@ -85,6 +85,7 @@ const TopBar = (props: TopBarProps) => {
                   <div className="flex space-x-4">
                     {navigationWithCurrent.map((item) => (
                       <Link
+                        passHref
                         href={item.href}
                         key={item.name}
                         aria-current={item.current ? "page" : undefined}
