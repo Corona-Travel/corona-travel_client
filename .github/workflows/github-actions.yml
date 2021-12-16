@@ -16,7 +16,7 @@ jobs:
           SECRET: ${{ secrets.NEXT_PUBLIC_GMAP_KEY }}
         run: docker build . --file Dockerfile --tag ctf \
               --build-arg GMAP_KEY_SECRET=$SECRET \
-              --build-arg API_URL="http://3.12.143.140:8080/";
+              --build-arg API_URL="http://3.12.143.140:8080/"
 
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
