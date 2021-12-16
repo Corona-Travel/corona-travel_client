@@ -2,7 +2,7 @@ name: Build Docker Image of frontend
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main, dev, hot-fix]
 
 jobs:
   build:
@@ -12,7 +12,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ctf
+        env:
+          SECRET: ${{ secrets.NEXT_PUBLIC_GMAP_KEY }}
+        run: docker build . --file Dockerfile --tag ctf --build-arg GMAP_KEY_SECRET=$SECRET --build-arg API_URL="http://3.12.143.140:8080/"
 
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
